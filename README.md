@@ -14,6 +14,9 @@ Navigate to the `zwang.py` file using `cd` and run `python zwang.py`.
 
 While in the same directory, run `cp zwang.py ~ && chmod +X ~/zwang.py`.  
 Then, in any directory, you can run Zwang using `~/zwang.py`.
+## Command Line Arguments
+You can also run zwang using either one or two command line arguments: `~/zwang.py [path] [name]`.  
+If only one argument is provided, you will be prompted for the name.
 ## License
 This software is licensed under the Bok Choy General Software License. The full text of the license should be included below. If not, more information can be found at https://www.rockwill.dev/Bok-Choy-License/.
 ```

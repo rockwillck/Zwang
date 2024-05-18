@@ -2,9 +2,17 @@
 
 from os import listdir
 from os.path import isfile, join
+import sys
 
-src = input("Folder Path: ")
-name = input("Package Name: ")
+if len(sys.argv) > 1:
+    src = sys.argv[1]
+else:
+    src = input("Folder Path: ")
+if len(sys.argv) > 2:
+    name = sys.argv[2]
+else:
+    name = input("Name: ")
+
 files = [open(join(src, f), "r").read() for f in listdir(src) if isfile(join(src, f)) and f.endswith(".js")]
 
 documentation = f"""# {name}
@@ -28,7 +36,7 @@ def document(f):
                 documentation += f"""## {lastClass}
 """
                 lastClassAdded = True
-            soFarDocumented += line.replace("/* ++", "", 1).strip() + "  \n"
+            soFarDocumented += "__"+line.replace("/* ++", "", 1).strip() + "__  \n"
         elif line.strip().endswith("-- */"):
             soFarDocumented += line.strip().replace("-- */", "") + "  \n"
             methodName = sliceUntil(lines[i + 1], "{")
