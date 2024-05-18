@@ -31,6 +31,7 @@ def document(f):
         # print(line)
         if line.startswith("class"):
             lastClass = sliceUntil(line.replace('class', '', 1), "{").strip()
+            lastClassAdded = False
         elif line.startswith("/* ++"):
             if not lastClassAdded:
                 documentation += f"""## {lastClass}
