@@ -30,9 +30,8 @@ def document(f):
                 lastClassAdded = True
             soFarDocumented += line.replace("/* ++", "", 1).strip() + "  \n"
         elif line.strip().endswith("-- */"):
-            soFarDocumented += line.strip().replace("-- */", "") + "  "
+            soFarDocumented += line.strip().replace("-- */", "") + "  \n"
             methodName = sliceUntil(lines[i + 1], "{")
-            print(soFarDocumented)
             documentation += f"""### {methodName}
 {soFarDocumented}"""
             soFarDocumented = ""
