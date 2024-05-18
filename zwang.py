@@ -25,25 +25,36 @@ def document(f):
     global documentation
     lastClass = ""
     lastClassAdded = False
-    lines = [l.strip() for l in f.split("\n")]
+    inSpecial = False
+    lines = [l for l in f.split("\n")]
     soFarDocumented = ""
     for i, line in enumerate(lines):
+        stripped = line.strip()
         # print(line)
-        if line.startswith("class"):
+        if stripped.startswith("class"):
             lastClass = sliceUntil(line.replace('class', '', 1), "{").strip()
             lastClassAdded = False
-        elif line.startswith("/* ++"):
+        elif stripped.startswith("/* ++"):
             if not lastClassAdded:
                 documentation += f"""## {lastClass}
 """
                 lastClassAdded = True
             soFarDocumented += "__"+line.replace("/* ++", "", 1).strip() + "__  \n"
-        elif line.strip().endswith("-- */"):
-            soFarDocumented += line.strip().replace("-- */", "") + "  \n"
-            methodName = sliceUntil(lines[i + 1], "{")
-            documentation += f"""### {methodName}
+        elif stripped.startswith("/* +"):
+            soFarDocumented = f"## {line[4:]}\n"
+            inSpecial = True
+        elif stripped.endswith("-- */"):
+            if not inSpecial:
+                soFarDocumented += line.strip().replace("-- */", "") + "  \n"
+                methodName = sliceUntil(lines[i + 1], "{")
+                documentation += f"""### {methodName}
 {soFarDocumented}"""
+            else:
+                documentation += "\n" + soFarDocumented
+                inSpecial = False
             soFarDocumented = ""
+        elif inSpecial:
+            soFarDocumented += line + "  \n"
         elif not soFarDocumented == "":
             soFarDocumented += line.strip() + "  \n"
             # print(soFarDocumented)

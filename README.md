@@ -3,7 +3,7 @@ Zwang is a tiny documentation tool I made for [Lenoir](https://github.com/rockwi
 ## Setup
 First, download the `zwang.py` file through `git clone` or by just clicking the file and then `Download raw file`.  
 Label any method inside a class using 
-```javscript
+```javascript
 /* ++ method summary
 further description
 including multiline!
@@ -14,6 +14,15 @@ Navigate to the `zwang.py` file using `cd` and run `python zwang.py`.
 
 While in the same directory, run `cp zwang.py ~ && chmod +X ~/zwang.py`.  
 Then, in any directory, you can run Zwang using `~/zwang.py`.
+## Sections
+If you need a section separate from a class or method, use
+```javascript
+/* + SECTION TITLE
+content
+etc.
+-- */
+```
+Note the singular `+` instead of `++`.
 ## Command Line Arguments
 You can also run zwang using either one or two command line arguments: `~/zwang.py [path] [name]`.  
 If only one argument is provided, you will be prompted for the name.
