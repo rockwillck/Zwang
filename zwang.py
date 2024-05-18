@@ -5,7 +5,7 @@ from os.path import isfile, join
 
 src = input("Folder Path: ")
 name = input("Package Name: ")
-files = [open(join(src, f), "r").read() for f in listdir(src) if isfile(join(src, f))]
+files = [open(join(src, f), "r").read() for f in listdir(src) if isfile(join(src, f)) and f.endswith(".js")]
 
 documentation = f"""# {name}
 """
